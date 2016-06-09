@@ -48,8 +48,6 @@ class Predicate:
 		self.args = args
 		self.isTrue = isTrue
 
-	def __repr__(self):
-		if self.isTrue:
-			return  "(" + self.head + " " + " ".join(self.args) + ")"
-		else:
-			return  "(not (" + self.head + " " + " ".join(self.args) + "))"
+	def __repr__(self):		
+		return  "(" + self.head + " " + " ".join(self.args) + ")"
+		
