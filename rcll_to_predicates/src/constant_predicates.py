@@ -9,8 +9,9 @@ def publish_constant_predicates():
 			preds.append(Predicate("robotOwner", [robot_to_object(team, i), teams[team]]))
 		for machine in machines:
 			preds.append(Predicate("machineOwner", [team + "-" + machine, teams[team]]))
-		preds.append(Predicate("hasShelf", [team + "-" + "CS1"]))
-		preds.append(Predicate("hasShelf", [team + "-" + "CS2"]))
+		for m in cs_machines:
+			preds.append(Predicate("hasShelf", [team + "-" + m]))
+			preds.append(Predicate("hasShelf", [team + "-" + m]))
 		for i in xrange(num_gates):
 			preds.append(Predicate("slideOn", [team + "-" + "DS", gate_to_object(i)]))
 		for i in xrange(num_magazines):

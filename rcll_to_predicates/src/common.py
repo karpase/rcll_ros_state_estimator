@@ -3,13 +3,23 @@ from std_msgs.msg import String
 from pike_msgs.msg import Predicates
 
 teams = {"M": "MagentaTeam", "C":"CyanTeam"}
-machines = ["BS","DS","CS-1","CS-2","RS-1", "RS-2"]
+
+cs_machines = ["CS-1","CS-2"]
+rs_machines = ["RS-1", "RS-2"]
+machines = ["BS","DS"] + cs_machines + rs_machines
+
+
 sides = ["InputSide","OutputSide"]
 shelfpos = ["ShelfLeft","ShelfMiddle","ShelfRight"]
 max_num_materials_for_ring = 2
 num_gates = 3
 num_magazines = 3
 num_orders = 9
+
+num_spare_caps = 20
+spare_cap_base_color = 1
+
+num_spare_rings = 20
 
 
 color_dict = {
