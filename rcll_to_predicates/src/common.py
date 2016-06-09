@@ -43,19 +43,7 @@ color_dict = {
 }
 
 
-pred_topic = '/Pike/Predicates'
-order_topic = '/robot1/rcll/order_info'
-ringinfo_topic = '/robot1/rcll/ring_info'
-machineinfo_topic = '/robot1/rcll/machine_info'
-pred_pub = rospy.Publisher(pred_topic, Predicates, queue_size=10)
 
-def publish_predicates(preds):
-	msg = Predicates()
-	msg.predicates = map(lambda x: str(x), preds)
-	msg.probabilities = map(lambda x: float(x.isTrue), preds)
-	pred_pub.publish(msg)
-	for p in preds:
-		print p
 
 
 

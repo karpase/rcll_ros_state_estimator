@@ -1,10 +1,10 @@
 import rospy
 from common import *
+from pike_publisher import *
 
-objects = {}
 
-	
-def publish_initial_predicates():	
+def generate_initial_predicates_and_objects():	
+	objects = {}
 	preds = []	
 	
 	for i in xrange(num_orders):
@@ -60,14 +60,20 @@ def publish_initial_predicates():
 			for base_obj in base_objs:
 				objects[base_obj] = "BaseWorkpiece"
 
-	publish_predicates(preds)		
+	return (preds, objects)
 
 def main():
-	rospy.init_node('initial_predicates', anonymous=True)	   
-	publish_initial_predicates()
+	rospy.init_node('initial_predicates', anonymous=True)	
+	publisher = PikePublisher()
+
+	preds, objects = generate_initial_predicates_and_objects()
+
+	
+	publisher.publish_predicates([])
 	rospy.sleep(1.0)
-	for o in objects:
-		print o + " - " + objects[o]
+	publisher.publish_predicates(preds)
+	rospy.sleep(1.0)
+	
 
 if __name__ == "__main__":
     main()	

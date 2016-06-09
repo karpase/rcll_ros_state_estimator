@@ -2,6 +2,13 @@ import rospy
 from rcll_ros_msgs.msg import *
 from std_msgs.msg import String
 from common import *
+from pike_publisher import *
+
+order_topic = '/robot1/rcll/order_info'
+ringinfo_topic = '/robot1/rcll/ring_info'
+machineinfo_topic = '/robot1/rcll/machine_info'
+
+publisher = PikePublisher()
 
 def order_to_predicates(order):
 	obj = order_to_object(order.id)
@@ -21,13 +28,13 @@ def process_order_info(order_info):
 	preds = []
 	for order in order_info.orders:
 		preds += order_to_predicates(order)
-	publish_predicates(preds)
+	publisher.publish_predicates(preds)
 
 def process_ring_info(ring_info):
 	preds = []
 	for r in ring_info.rings:
 		preds.append(Predicate("numBasesForColor", [color_to_object("ring", r.ring_color), number_to_object(r.raw_material)]))
-	publish_predicates(preds)
+	publisher.publish_predicates(preds)
 
 def process_machine_info(machine_info):
 	preds = []
@@ -35,11 +42,11 @@ def process_machine_info(machine_info):
 		if m.type == "RS":
 			for c in m.rs_ring_colors:
 				preds.append(Predicate("hasColor", [m.name, color_to_object("ring", c)]))
-	publish_predicates(preds)
+	publisher.publish_predicates(preds)
 
 def main():
 	rospy.init_node('order_info_to_predicate', anonymous=True)
-	pred_pub = rospy.Publisher(pred_topic, String, queue_size=10)
+	
 	order_sub = rospy.Subscriber(order_topic, OrderInfo, process_order_info)
 	ringinfo_sub = rospy.Subscriber(ringinfo_topic, RingInfo, process_ring_info)
 	machineinfo_sub = rospy.Subscriber(machineinfo_topic, MachineInfo, process_machine_info)
