@@ -14,8 +14,9 @@ def publish_constant_predicates():
 			preds.append(Predicate("hasShelf", [team + "-" + m]))
 		for i in xrange(num_gates):
 			preds.append(Predicate("slideOn", [team + "-" + "DS", gate_to_object(i)]))
-		for i in xrange(num_magazines):
-			preds.append(Predicate("magazineInMachineSide", [magazine_to_object(team, i) ,team + "-" + "BS", "OutputSide"]))
+		for c in color_dict["base"].keys():
+			magazine = team + "-" + "BSMagazine" + str(c)		
+			preds.append(Predicate("magazineInMachineSide", [magazine, team + "-" + "BS", "OutputSide"]))
 	preds.append(Predicate("control",["CyanTeam"])) # todo: how do we know which team we are?
 	publish_predicates(preds)	
 

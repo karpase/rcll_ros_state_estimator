@@ -4,8 +4,8 @@ from pike_msgs.msg import Predicates
 
 teams = {"M": "MagentaTeam", "C":"CyanTeam"}
 
-cs_machines = ["CS-1","CS-2"]
-rs_machines = ["RS-1", "RS-2"]
+cs_machines = ["CS1","CS2"]
+rs_machines = ["RS1", "RS2"]
 machines = ["BS","DS"] + cs_machines + rs_machines
 
 
@@ -14,7 +14,7 @@ shelfpos = ["ShelfLeft","ShelfMiddle","ShelfRight"]
 max_num_materials_for_ring = 2
 num_gates = 3
 num_magazines = 3
-num_orders = 9
+num_orders = 10
 
 num_spare_caps = 20
 spare_cap_base_color = 1
@@ -54,6 +54,8 @@ def publish_predicates(preds):
 	msg.predicates = map(lambda x: str(x), preds)
 	msg.probabilities = map(lambda x: float(x.isTrue), preds)
 	pred_pub.publish(msg)
+	for p in preds:
+		print p
 
 
 
