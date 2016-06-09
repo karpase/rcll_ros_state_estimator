@@ -6,12 +6,12 @@ from common import *
 def order_to_predicates(order):
 	obj = order_to_object(order.id)
 	complexity = Predicate("orderType", [obj, "OrderType" + str(order.complexity)])
-	base = Predicate("orderBaseColor", [obj, color_to_object(order.base_color)])
-	cap = Predicate("orderCapColor", [obj, color_to_object(order.cap_color)])
+	base = Predicate("orderBaseColor", [obj, color_to_object("base", order.base_color)])
+	cap = Predicate("orderCapColor", [obj, color_to_object("cap", order.cap_color)])
 	delivery = Predicate("orderPossibleDeliverySlide", [obj, gate_to_object(order.delivery_gate)])
 	rings = []
 	for i in xrange(order.complexity):
-		rings.append(Predicate("orderRing" + str(i+1) + "Color", [obj, color_to_object(order.ring_colors[i])]))
+		rings.append(Predicate("orderRing" + str(i+1) + "Color", [obj, color_to_object("ring", order.ring_colors[i])]))
 	filled = Predicate("filled", [order_to_object(i)], False)
 	preds = [filled, complexity, base, cap, delivery] + rings
 	# handle filled(order) - output it as true for orders that are fulfilled or haven't appeared yet, and false for orders that have appeared and are pending
@@ -26,7 +26,7 @@ def process_order_info(order_info):
 def process_ring_info(ring_info):
 	preds = []
 	for r in ring_info.rings:
-		preds.append(Predicate("numBasesForColor", [color_to_object(r.ring_color), number_to_object(r.raw_material)]))
+		preds.append(Predicate("numBasesForColor", [color_to_object("ring", r.ring_color), number_to_object(r.raw_material)]))
 	publish_predicates(preds)
 
 def process_machine_info(machine_info):
@@ -34,7 +34,7 @@ def process_machine_info(machine_info):
 	for m in machine_info.machines:
 		if m.type == "RS":
 			for c in m.rs_ring_colors:
-				preds.append(Predicate("hasColor", [m.name, color_to_object(c)]))
+				preds.append(Predicate("hasColor", [m.name, color_to_object("ring", c)]))
 	publish_predicates(preds)
 
 def main():

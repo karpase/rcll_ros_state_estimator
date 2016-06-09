@@ -15,6 +15,9 @@ def publish_initial_predicates():
 		preds.append(Predicate("numberOfLoadedBases", [team + "-" + "RS2", number_to_object(0)]))		
 		preds.append(Predicate("slideClear", [team + "-" + "CS1"]))
 		preds.append(Predicate("slideClear", [team + "-" + "CS2"]))
+		for p in shelfpos:
+			preds.append(Predicate("shelfPosEmpty", [team + "-" + "CS1", p]))
+			preds.append(Predicate("shelfPosEmpty", [team + "-" + "CS2", p]))
 
 	for i in xrange(num_orders):
 		preds.append(Predicate("filled", [order_to_object(i)]))

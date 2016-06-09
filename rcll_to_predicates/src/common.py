@@ -5,10 +5,31 @@ from pike_msgs.msg import Predicates
 teams = {"M": "MagentaTeam", "C":"CyanTeam"}
 machines = ["BS","DS","CS-1","CS-2","RS-1", "RS-2"]
 sides = ["InputSide","OutputSide"]
+shelfpos = ["ShelfLeft","ShelfMiddle","ShelfRight"]
 max_num_materials_for_ring = 2
 num_gates = 3
 num_magazines = 3
 num_orders = 9
+
+
+color_dict = {
+	"ring": {
+		1: "blue",
+		2: "green",
+		3: "orange",
+		4: "yellow"		
+	},
+	"base": {
+		1: "red",
+		2: "black",
+		3: "silver"
+	},
+	"cap": {
+		1: "black",
+		2: "grey"
+	}
+}
+
 
 pred_topic = '/Pike/Predicates'
 order_topic = '/robot1/rcll/order_info'
@@ -27,8 +48,8 @@ def publish_predicates(preds):
 def gate_to_object(gate):
 	return "gate" + str(gate)
 
-def color_to_object(color):
-	return "color" + str(color)
+def color_to_object(type, color):
+	return color_dict[type][color]	
 
 def number_to_object(num):
 	return "n" + str(num)
