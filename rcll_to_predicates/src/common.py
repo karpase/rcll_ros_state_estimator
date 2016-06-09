@@ -21,6 +21,8 @@ spare_cap_base_color = 1
 
 num_spare_rings = 20
 
+num_spare_bases = 20
+
 
 color_dict = {
 	"ring": {
