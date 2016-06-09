@@ -1,6 +1,6 @@
 import rospy
 from std_msgs.msg import String
-#from pike_msgs.msg import Predicates
+from pike_msgs.msg import Predicates
 
 teams = {"M": "MagentaTeam", "C":"CyanTeam"}
 machines = ["BS","DS","CS-1","CS-2","RS-1", "RS-2"]
@@ -14,14 +14,13 @@ pred_topic = '/Pike/Predicates'
 order_topic = '/robot1/rcll/order_info'
 ringinfo_topic = '/robot1/rcll/ring_info'
 machineinfo_topic = '/robot1/rcll/machine_info'
-pred_pub = rospy.Publisher(pred_topic, String, queue_size=10)
+pred_pub = rospy.Publisher(pred_topic, Predicates, queue_size=10)
 
 def publish_predicates(preds):
-	for p in preds:
-		if p.isTrue:
-			pred_pub.publish(str(p))
-		else:
-			print p
+	msg = Predicates()
+	msg.predicates = map(lambda x: str(x), preds)
+	msg.probabilities = map(lambda x: float(x.isTrue), preds)
+	pred_pub.publish(msg)
 
 
 
