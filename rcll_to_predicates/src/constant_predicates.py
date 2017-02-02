@@ -1,6 +1,8 @@
+#!/usr/bin/env python
+
 import rospy
 from common import *
-from pike_publisher import *
+from rosplan_publisher import *
 
 def generate_constant_predicates():	
 	preds = []
@@ -25,7 +27,7 @@ def generate_constant_predicates():
 def main():	
 	rospy.init_node('constant_predicates', anonymous=True)	   
 
-	publisher = PikePublisher()
+	publisher = ROSPlanPublisher()
 	rate = rospy.Rate(1) # 1hz
 	while not rospy.is_shutdown():
 		preds = generate_constant_predicates()        

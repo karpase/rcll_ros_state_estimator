@@ -11,7 +11,7 @@ class ROSPlanPublisher:
 
 	def __init__(self, service_name = rosplan_knowledge_update_service):
 		self.service_name = service_name		
-		rospy.wait_for_service(service)
+		rospy.wait_for_service(service_name)
 		self.update_knowledge = rospy.ServiceProxy(self.service_name, KnowledgeUpdateServiceArray)
 
 
@@ -27,4 +27,4 @@ class ROSPlanPublisher:
 				kv.value = p.args[i]
 				k.values.append(kv)
 			ka.append(k)
-		self.update_knowledge(self.ADD_KNOWLEDGE, k)
+		self.update_knowledge(self.ADD_KNOWLEDGE, ka)

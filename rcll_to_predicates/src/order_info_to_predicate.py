@@ -1,14 +1,16 @@
+#!/usr/bin/env python
+
 import rospy
 from rcll_ros_msgs.msg import *
 from std_msgs.msg import String
 from common import *
-from pike_publisher import *
+from rosplan_publisher import *
 
 order_topic = '/robot1/rcll/order_info'
 ringinfo_topic = '/robot1/rcll/ring_info'
 machineinfo_topic = '/robot1/rcll/machine_info'
 
-publisher = PikePublisher()
+publisher = ROSPlanPublisher()
 
 def order_to_predicates(order):
 	obj = order_to_object(order.id)
@@ -19,7 +21,7 @@ def order_to_predicates(order):
 	rings = []
 	for i in xrange(order.complexity):
 		rings.append(Predicate("orderRing" + str(i+1) + "Color", [obj, color_to_object("ring", order.ring_colors[i])]))
-	filled = Predicate("filled", [order_to_object(i)], False)
+	filled = Predicate("filled", [obj], False)
 	preds = [filled, complexity, base, cap, delivery] + rings
 	# handle filled(order) - output it as true for orders that are fulfilled or haven't appeared yet, and false for orders that have appeared and are pending
 	return preds

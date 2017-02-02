@@ -1,6 +1,6 @@
 import rospy
 from std_msgs.msg import String
-from pike_msgs.msg import Predicates
+
 
 teams = {"M": "MagentaTeam", "C":"CyanTeam"}
 

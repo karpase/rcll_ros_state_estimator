@@ -1,6 +1,8 @@
+#!/usr/bin/env python
+
 import rospy
 from common import *
-from pike_publisher import *
+from rosplan_publisher import *
 
 
 def generate_initial_predicates_and_objects():	
@@ -64,7 +66,7 @@ def generate_initial_predicates_and_objects():
 
 def main():
 	rospy.init_node('initial_predicates', anonymous=True)	
-	publisher = PikePublisher()
+	publisher = ROSPlanPublisher()
 
 	preds, objects = generate_initial_predicates_and_objects()
 
