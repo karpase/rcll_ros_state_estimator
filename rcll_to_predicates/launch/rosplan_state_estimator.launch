@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+    <node name="initial_state_publisher" pkg="rcll_to_predicates" type="initial_predicates.py" />
+    <node name="const_publisher" pkg="rcll_to_predicates" type="constant_predicates.py" />
+    <node name="order_publisher" pkg="rcll_to_predicates" type="order_info_to_predicate.py" />
+</launch>
+
