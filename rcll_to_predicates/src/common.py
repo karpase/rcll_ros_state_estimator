@@ -73,4 +73,12 @@ class Predicate:
 
 	def __repr__(self):		
 		return  "(" + self.head + " " + " ".join(self.args) + ")"
+
+class Instance:
+	def __init__(self, name, obj_type):
+		self.name = name
+		self.obj_type = obj_type
+
+	def __repr__(self):
+		return self.name + " - " + self.obj_type
 		
