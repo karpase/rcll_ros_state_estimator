@@ -16,9 +16,9 @@ def generate_initial_predicates_and_objects():
 	for team in teams.keys():
 		objects[teams[team]] = "Team"
 		for i in xrange(1,4):
-			preds.append(Predicate("empty-gripper", [robot_to_object(team, i)]))
-			preds.append(Predicate("atMachine", [robot_to_object(team, i), team + "-" + "Start"]))
+			preds.append(Predicate("emptyGripper", [robot_to_object(team, i)]))			
 			preds.append(Predicate("atMachineSide", [robot_to_object(team, i), "InputSide"]))
+			preds.append(Predicate("at", [robot_to_object(team, i), team + "-" + "Start"]))
 			objects[robot_to_object(team, i)]="Robot"
 		objects[team + "-" + "Start"] = "StartLocation"
 			
@@ -26,7 +26,7 @@ def generate_initial_predicates_and_objects():
 			for side in sides:
 				preds.append(Predicate("machineSideClear", [team + "-" + machine, side]))
 		for m in rs_machines:
-			preds.append(Predicate("numberOfLoadedBases", [team + "-" + m, number_to_object(0)]))
+			#preds.append(Predicate("numberOfLoadedBases", [team + "-" + m, number_to_object(0)]))
 			objects[team + "-" + m] = "RingStation"
 		for m in cs_machines:			
 			preds.append(Predicate("slideClear", [team + "-" + m]))
@@ -34,9 +34,9 @@ def generate_initial_predicates_and_objects():
 		objects[team + "-BS"]="BaseStation"
 		objects[team + "-DS"]="DeliveryStation"
 			
-		for p in shelfpos:
-			for m in cs_machines:			
-				preds.append(Predicate("shelfPosEmpty", [team + "-" + m, p]))				
+		#for p in shelfpos:
+		#	for m in cs_machines:			
+		#		preds.append(Predicate("shelfPosEmpty", [team + "-" + m, p]))				
 
 		for c in color_dict["cap"].keys():
 			for i in xrange(num_spare_caps):		
