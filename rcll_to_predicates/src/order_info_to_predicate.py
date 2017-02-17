@@ -47,7 +47,7 @@ def process_machine_info(machine_info):
 		preds.append(Predicate("machineState", [m.name, m.state]))
 		for ms in machine_states:
 			if ms != m.state:
-				preds.append(Predicate("machineState", [m.name, ms], False)))
+				preds.append(Predicate("machineState", [m.name, ms], False))
 	publisher.publish_predicates(preds)
 
 def main():
