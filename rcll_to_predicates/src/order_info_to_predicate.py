@@ -45,6 +45,9 @@ def process_machine_info(machine_info):
 			for c in m.rs_ring_colors:
 				preds.append(Predicate("hasColor", [m.name, color_to_object("ring", c)]))
 		preds.append(Predicate("machineState", [m.name, m.state]))
+		for ms in machine_states:
+			if ms != m.state:
+				preds.append(Predicate("machineState", [m.name, ms], False)))
 	publisher.publish_predicates(preds)
 
 def main():

@@ -9,7 +9,7 @@ def generate_initial_predicates_and_objects():
 	objects = {}
 	preds = []	
 
-	for ms in ["IDLE", "BROKEN", "PREPARED", "PROCESSING", "PROCESSED", "READY-AT-OUTPUT", "WAIT-IDLE", "DOWN"]:
+	for ms in machine_states:
 		objects[ms] = "MachineState"
 	
 	for i in xrange(num_orders):

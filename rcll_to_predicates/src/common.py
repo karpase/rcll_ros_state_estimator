@@ -8,6 +8,8 @@ cs_machines = ["CS1","CS2"]
 rs_machines = ["RS1", "RS2"]
 machines = ["BS","DS"] + cs_machines + rs_machines
 
+machine_states = ["IDLE", "BROKEN", "PREPARED", "PROCESSING", "PROCESSED", "READY-AT-OUTPUT", "WAIT-IDLE", "DOWN"]
+
 
 sides = ["InputSide","OutputSide"]
 shelfpos = ["ShelfLeft","ShelfMiddle","ShelfRight"]
