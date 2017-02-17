@@ -8,6 +8,9 @@ from rosplan_publisher import *
 def generate_initial_predicates_and_objects():	
 	objects = {}
 	preds = []	
+
+	for ms in ["IDLE", "BROKEN", "PREPARED", "PROCESSING", "PROCESSED", "READY-AT-OUTPUT", "WAIT-IDLE", "DOWN"]:
+		objects[ms] = "MachineState"
 	
 	for i in xrange(num_orders):
 		preds.append(Predicate("filled", [order_to_object(i)]))
