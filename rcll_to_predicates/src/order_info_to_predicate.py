@@ -34,8 +34,8 @@ def process_order_info(order_info):
 
 def process_ring_info(ring_info):
 	preds = []
-	for r in ring_info.rings:
-		preds.append(Predicate("numBasesForColor", [color_to_object("ring", r.ring_color), number_to_object(r.raw_material)]))
+	#for r in ring_info.rings:
+	#	preds.append(Predicate("numBasesForColor", [color_to_object("ring", r.ring_color), number_to_object(r.raw_material)]))
 	publisher.publish_predicates(preds)
 
 def process_machine_info(machine_info):
