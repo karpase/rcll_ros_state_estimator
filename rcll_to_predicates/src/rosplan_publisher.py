@@ -45,6 +45,7 @@ class ROSPlanPublisher:
 				kv.value = p.args[i].lower()
 				k.values.append(kv)
 			ka.append(k)
+			k.is_negative = not p.isTrue
 		self.publish(ka)
 		
 

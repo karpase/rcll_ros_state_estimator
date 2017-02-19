@@ -74,8 +74,10 @@ class Predicate:
 		self.isTrue = isTrue
 
 	def __repr__(self):		
-		return  "(" + self.head + " " + " ".join(self.args) + ")"
-
+		if self.isTrue:
+			return  "(" + self.head + " " + " ".join(self.args) + ")"
+		else:
+			return  "(not (" + self.head + " " + " ".join(self.args) + "))"
 class Instance:
 	def __init__(self, name, obj_type):
 		self.name = name
